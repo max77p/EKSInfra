@@ -6,16 +6,14 @@ module "vpc" {
   enable_dns_hostnames = var.enable_dns_hostnames
 }
 
-# module "private_subnet" {
-#   source = "./subnet"
+module "private_subnet" {
+  source = "./subnet"
 
-#   name               = "${var.app}_${var.environment}_private_subnet"
-#   environment        = var.environment
-#   app                = var.app
-#   vpc_id             = module.vpc.id
-#   cidrs              = var.private_subnet_cidrs
-#   availability_zones = var.availability_zones
-# }
+  vpc_id = module.vpc.vpc_id
+  cidrs = var.private_subnet_cidrs
+  availability_zones = var.availability_zones
+  tags   = var.tags
+}
 
 # module "public_subnet" {
 #   source = "./subnet"

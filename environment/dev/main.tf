@@ -9,13 +9,13 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = var.location
+  region                  = var.location
   shared_credentials_file = "~/.aws/credentials"
   profile                 = "shan"
   default_tags {
-   tags = {
-   }
- }
+    tags = {
+    }
+  }
 }
 
 
@@ -25,14 +25,16 @@ module "network" {
   # ]
   source = "../../modules/networking"
 
-  tags   = var.tags
-  vpc_cidr = var.vpc_cidr
+  tags                 = var.tags
+  vpc_cidr             = var.vpc_cidr
   enable_dns_hostnames = var.enable_dns_hostnames
+  private_subnet_cidrs = var.private_subnet_cidrs
+  availability_zones   = var.availability_zones
 }
 
 # module "resource_group" {
 #   source = "../../modules/resource_groups"
-  
+
 #   network_resource_group_name = var.network_resource_group_name
 #   location = var.location
 
